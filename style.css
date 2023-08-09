@@ -1,0 +1,145 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 38px;
+  margin-top: 20px;
+}
+
+
+  
+*{
+  background-color: rgb(241,223,201);
+  justify-content: center;
+}
+
+h1 {
+  font-size: 50px;
+ 
+  background-color: rgb(232,209,189);
+  color: rgb(40,33,24);
+  border: 1px solid rgb(82,64,47);
+  text-align: center;
+  border-radius: 20px;
+}
+.center {
+  gap: 9px;
+  display: flex;
+  justify-content: center;
+}
+
+.clickbtn {
+  width: 180px;
+  height: 50px;
+  background-color: rgb(104,89,76);
+  color: rgb(241,223,201);
+  border: 1px solid rgb(82,64,47);
+  font-size: 22px;
+  border-radius: 10px;
+}
+
+.image {
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 1000px;
+  height: 360px;
+  z-index:1;
+}
+
+.inputer {
+
+  width: 40px;
+
+}
+
+
+
+.cell {
+  width: 130px;
+  text-align: center;
+  height: 130px;
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:70px;
+  cursor: pointer;
+}
+
+#A11 {
+  width: 130px;
+  text-align: center;
+  height: 130px;
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  cursor: pointer;
+  border-top-left-radius: 50px;
+}
+
+#A31 {
+  width: 130px;
+  text-align: center;
+  height: 130px;
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  cursor: pointer;
+  border-top-right-radius: 50px;
+}
+
+#A13 {
+  width: 130px;
+  text-align: center;
+  height: 130px;
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  cursor: pointer;
+  border-bottom-left-radius: 50px;
+}
+
+#A33 {
+  width: 130px;
+  text-align: center;
+  height: 130px;
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  cursor: pointer;
+  border-bottom-right-radius: 50px;
+}
+
+.inputer {
+  background-color: rgb(232,209,189);
+  color : rgb(82,64,47);
+  border: 1px solid rgb(82,64,47);
+  border-radius: 12px;
+  display: flex;
+  height: 35px;
+  font-size: 30px;
+  width: 65px;
+  text-align: center;
+}
+

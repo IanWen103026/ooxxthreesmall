@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>三小成發 - OOXX</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1 style="font-family:monospace;" >三小圈圈叉叉 - 選擇模式</h1>
+  <div class = "center">
+    <button class = "clickbtn" onclick="startGame('human')">雙人模式</button>
+    <button class = "clickbtn" onclick="startGame('robot')">與AI對戰</button>
+  <button class = "clickbtn" onclick="startGame('idiot')">滿滿的成就感</button> 
+    <button class = "clickbtn" onclick="startGame('robotvsrobot')">AI間的決鬥</button>
+<button class = "clickbtn" onclick="startGame('idiotvsidiot')">智障間的決鬥</button> 
+
+    <button class = "clickbtn" id = "reset" onclick="resetBoard()">重製盤面</button>
+  </div>
+  
+  <div class="board" id="board" style="display: none;">
+    <div style="font-family:monospace;" id = "A11" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A21" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A31" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A12" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A22" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A32" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A13" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A23" class="cell" onclick="makeMove(this)"></div>
+    <div style="font-family:monospace;" id = "A33" class="cell" onclick="makeMove(this)"></div>
+   
+  </div>
+
+  
+
+  <img class="image" id="image" src = "https://media.discordapp.net/attachments/845555784909455390/1138457241352151122/image.png?width=1440&height=502">
+  <div>
+    <form>
+      <input type="text" name="欄位名稱" class="inputer" id="inputer1" value="O" >
+      <input type="text" name="欄位名稱" class="inputer" id="inputer2" value="X" >
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
