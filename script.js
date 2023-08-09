@@ -25,6 +25,9 @@ document.getElementById("inputer2").style.display = "none";
 
 function startGame(mode) {
   
+
+  
+
   OText = document.getElementById("inputer1").value
   XText = document.getElementById("inputer2").value
 
@@ -45,6 +48,7 @@ function startGame(mode) {
 
 
   document.getElementById("image").style.display = "none";
+  display = "none";
 
   document.getElementById("reset").style.display = "block";
  
@@ -76,14 +80,16 @@ function makeMove(cell) {
   OText = document.getElementById("inputer1").value
   XText = document.getElementById("inputer2").value
 
+  
+
   if (boardactive) {
     const index = Array.from(cell.parentNode.children).indexOf(cell);
 
   if (board[index] === "") {
     board[index] = currentPlayer;
     cell.textContent = currentPlayer;
-
-    if (checkWin(currentPlayer)) {
+    cell.style.color = "rgb(82,64,47)"
+    if (checkrealWin(currentPlayer)) {
       
         document.querySelector("h1").innerHTML = currentPlayer + " 勝利！";
         boardactive = false
@@ -139,6 +145,9 @@ function resetBoard() {
     currentPlayer = OText;
     board = ["", "", "", "", "", "", "", "", ""];
     const cells = document.querySelectorAll(".cell");
+
+    cells.forEach(cell => cell.style.color = "rgb(232,209,18)");
+    
     cells.forEach(cell => cell.textContent = "");
 
 
@@ -167,7 +176,72 @@ function resetBoard() {
   }
 
 
+function colorcell(getcolorcell) {
+  console.log(getcolorcell);
+  getcolorcell.style.color = "rgb(212,30,30)";
+}
 
+async function checkcolorcell(whichtocolor,when) {
+  console.log(whichtocolor);
+  let getcell = parseInt(whichtocolor);
+
+  if (when == 1) {
+    await delay();
+  }
+
+  if (when == 2) {
+    await delay(0.35);
+  }
+
+  if (when == 3) {
+    await delay(0.7);
+  }
+
+  
+  let get = false;
+
+  if (getcell == 1) {
+    get = true;
+    colorcell(document.getElementById("A21"));
+}
+if (getcell == 2) {
+    get = true;
+    colorcell(document.getElementById("A31"));
+}
+if (getcell == 3) {
+    get = true;
+    colorcell(document.getElementById("A12"));
+}
+if (getcell == 4) {
+    get = true;
+    colorcell(document.getElementById("A22"));
+}
+if (getcell == 5) {
+    get = true;
+    colorcell(document.getElementById("A32"));
+}
+if (getcell == 6) {
+    get = true;
+    colorcell(document.getElementById("A13"));
+}
+if (getcell == 7) {
+    get = true;
+    colorcell(document.getElementById("A23"));
+}
+if (getcell == 8) {
+    get = true;
+    colorcell(document.getElementById("A33"));
+}
+
+if (get) {
+    
+} else {
+  colorcell(document.getElementById("A11"));
+}
+
+}
+
+  
 
 function minimax(newBoard, player) {
     const availableMoves = emptyCells(newBoard);
@@ -222,17 +296,56 @@ function minimax(newBoard, player) {
     return moves[bestMove];
   }
 
-function checkWin(player) {
+function checkWin(player,mode) {
     const winningCombos = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8], // 水平
       [0, 3, 6], [1, 4, 7], [2, 5, 8], // 垂直
       [0, 4, 8], [2, 4, 6] // 對角線
     ];
-  
+
+    
     for (const combo of winningCombos) {
-      if (board[combo[0]] === player && board[combo[1]] === player && board[combo[2]] === player) {
+      const [a, b, c] = combo;
+      
+      if (board[a] === player && board[b] === player && board[c] === player) {
+
+     
+
         return true;
+        
       }
+
+      
+    }
+    return false;
+  }
+
+
+
+  function checkrealWin(player) {
+    const winningCombos = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // 水平
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // 垂直
+      [0, 4, 8], [2, 4, 6] // 對角線
+    ];
+
+    
+    for (const combo of winningCombos) {
+      const [a, b, c] = combo;
+      
+      if (board[a] === player && board[b] === player && board[c] === player) {
+
+        checkcolorcell(a,1);
+        
+          checkcolorcell(b,2);
+        
+         checkcolorcell(c,3);
+
+        return true;
+        
+      }
+
+      
     }
     return false;
   }
