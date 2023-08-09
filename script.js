@@ -55,23 +55,28 @@ function startGame(mode) {
   document.getElementById("board").style.display = "grid";
   if (mode === "robot") {
     document.querySelector("h1").innerHTML = "當前模式: 單人模式";
+    resetBoard()
   }
 
   if (mode === "robotvsrobot") {
     document.querySelector("h1").innerHTML = "當前模式: 人工智慧間的對決";
     makeMove(document.getElementById("A"+String(parseInt(Math.random()*3 + 1))+String(parseInt(Math.random()*3 + 1))))
+    resetBoard()
   } 
   if (mode === "human") {
     document.querySelector("h1").innerHTML = "當前模式: 雙人模式";
+    resetBoard()
   }
 
   if (mode === "idiot") {
     document.querySelector("h1").innerHTML = "當前模式: 成就感模式";
+    resetBoard()
   }
 
   if (mode === "idiotvsidiot") {
     document.querySelector("h1").innerHTML = "當前模式: 人工智障間的對決";
     makeMove(document.getElementById("A"+String(parseInt(Math.random()*3 + 1))+String(parseInt(Math.random()*3 + 1))))
+    resetBoard()
   }
 }
 
@@ -356,14 +361,14 @@ function checkWin(player,mode) {
   
  
   async function makeRobotMove() {
-    await delay(0.3);
+    await delay(0.5);
     const bestMove = minimax(board, XText).index;
     const cell = document.getElementById("board").children[bestMove];
     makeMove(cell);
   }
 
   async function makeDumbMove() {
-    await delay(0.3);
+    await delay(0.5);
     
     let randmmove = emptyCells(board)[parseInt(Math.random()*emptyCells(board).length)]
     let get = false
@@ -411,7 +416,7 @@ function checkWin(player,mode) {
   }
 
   async function makeDumbMove2() {
-    await delay(0.3);
+    await delay(0.5);
     
     let randmmove = emptyCells(board)[parseInt(Math.random()*emptyCells(board).length)]
     let get = false
@@ -459,7 +464,7 @@ function checkWin(player,mode) {
   }
 
   async function makeRobotMove2() {
-    await delay(0.3);
+    await delay(0.5);
     const bestMove = minimax(board, OText).index;
     const cell = document.getElementById("board").children[bestMove];
     makeMove(cell);
