@@ -21,7 +21,7 @@ let XText = "X"
 document.getElementById("reset").style.display = "none";
 document.getElementById("inputer1").style.display = "none";
 document.getElementById("inputer2").style.display = "none";
-
+document.getElementById("h2").style.display = "none";
 
 function startGame(mode) {
   
@@ -46,7 +46,7 @@ function startGame(mode) {
   document.getElementById("inputer2").style.display = "block";
   
 
-
+  document.getElementById("h2").style.display = "block";
   document.getElementById("image").style.display = "none";
   display = "none";
 
