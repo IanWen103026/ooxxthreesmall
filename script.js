@@ -93,7 +93,11 @@ function makeMove(cell) {
   if (board[index] === "") {
     board[index] = currentPlayer;
     cell.textContent = currentPlayer;
-    cell.style.color = "rgb(82,64,47)"
+    if (currentPlayer === OText) {
+      cell.style.color = "rgb(235,182,61)"
+    } else {
+      cell.style.color = "rgb(49,196,190)"
+    }
     if (checkrealWin(currentPlayer)) {
       
         document.querySelector("h1").innerHTML = currentPlayer + " 勝利！";
@@ -151,11 +155,10 @@ function resetBoard() {
     board = ["", "", "", "", "", "", "", "", ""];
     const cells = document.querySelectorAll(".cell");
 
-    cells.forEach(cell => cell.style.color = "rgb(232,209,18)");
-    
+    cells.forEach(cell => cell.style.color = "rgb(30,54,64)")
     cells.forEach(cell => cell.textContent = "");
 
-
+    
 
     if (modesave === "robot") {
         document.querySelector("h1").innerHTML = "當前模式: 單人模式";
