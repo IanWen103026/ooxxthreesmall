@@ -6,7 +6,8 @@ let modesave = "";
 let boardactive = true;
 let isRobotProMaxGame = false;
 let isDumbProMaxGame = false;
-
+let PlayerCanControl = false;
+let currentround = 0;
 function delay(n){
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
@@ -25,9 +26,6 @@ document.getElementById("h2").style.display = "none";
 
 function startGame(mode) {
   
-
-  
-
   OText = document.getElementById("inputer1").value
   XText = document.getElementById("inputer2").value
 
@@ -54,29 +52,52 @@ function startGame(mode) {
  
   document.getElementById("board").style.display = "grid";
   if (mode === "robot") {
+    
+    PlayerCanControl = true;
     document.querySelector("h1").innerHTML = "當前模式: 單人模式";
     resetBoard()
   }
 
   if (mode === "robotvsrobot") {
+    
+    PlayerCanControl = false;
     document.querySelector("h1").innerHTML = "當前模式: 人工智慧間的對決";
-    makeMove(document.getElementById("A"+String(parseInt(Math.random()*3 + 1))+String(parseInt(Math.random()*3 + 1))))
     resetBoard()
   } 
   if (mode === "human") {
+    
+    PlayerCanControl = true;
     document.querySelector("h1").innerHTML = "當前模式: 雙人模式";
     resetBoard()
   }
 
   if (mode === "idiot") {
+    
+    PlayerCanControl = true;
     document.querySelector("h1").innerHTML = "當前模式: 成就感模式";
     resetBoard()
   }
 
   if (mode === "idiotvsidiot") {
+    PlayerCanControl = false;
     document.querySelector("h1").innerHTML = "當前模式: 人工智障間的對決";
-    makeMove(document.getElementById("A"+String(parseInt(Math.random()*3 + 1))+String(parseInt(Math.random()*3 + 1))))
     resetBoard()
+  }
+}
+
+function makePlayerMove(cell) {
+  
+  OText = document.getElementById("inputer1").value
+  XText = document.getElementById("inputer2").value
+  if (PlayerCanControl) {
+    if (modesave === "human") {
+      makeMove(cell);
+    }
+    if (modesave === "idiot"||modesave === "robot") {
+      if (currentPlayer === OText) {
+        makeMove(cell);
+      }
+    }
   }
 }
 
@@ -85,14 +106,12 @@ function makeMove(cell) {
   OText = document.getElementById("inputer1").value
   XText = document.getElementById("inputer2").value
 
-  
-
   if (boardactive) {
     const index = Array.from(cell.parentNode.children).indexOf(cell);
 
   if (board[index] === "") {
     board[index] = currentPlayer;
-    cell.textContent = currentPlayer;
+    cell.innerHTML = currentPlayer;
     if (currentPlayer === OText) {
       cell.style.color = "rgb(235,182,61)"
     } else {
@@ -115,16 +134,13 @@ function makeMove(cell) {
       }
     
       if (isRobotProMaxGame && currentPlayer === XText) {
+
         makeRobotMove();
       }
 
       if (isRobotProMaxGame && currentPlayer === OText) {
         makeRobotMove2();
       }
-
-
-
-
 
       if (isDumbGame && currentPlayer === XText) {
 
@@ -140,9 +156,7 @@ function makeMove(cell) {
         makeDumbMove2();
       }
 
-
-    }
-        
+    }        
   }
   }
 }
@@ -152,11 +166,12 @@ function resetBoard() {
     XText = document.getElementById("inputer2").value
     boardactive = true
     currentPlayer = OText;
+    currentround++;
     board = ["", "", "", "", "", "", "", "", ""];
     const cells = document.querySelectorAll(".cell");
 
     cells.forEach(cell => cell.style.color = "rgb(30,54,64)")
-    cells.forEach(cell => cell.textContent = "");
+    cells.forEach(cell => cell.innerHTML = "");
 
     
 
@@ -364,14 +379,22 @@ function checkWin(player,mode) {
   
  
   async function makeRobotMove() {
+    let roundsave = currentround;
     await delay(0.5);
+    if (roundsave != currentround) {
+      return;
+    }
     const bestMove = minimax(board, XText).index;
     const cell = document.getElementById("board").children[bestMove];
     makeMove(cell);
   }
 
   async function makeDumbMove() {
+    let roundsave = currentround;
     await delay(0.5);
+    if (roundsave != currentround) {
+      return;
+    }
     
     let randmmove = emptyCells(board)[parseInt(Math.random()*emptyCells(board).length)]
     let get = false
@@ -419,8 +442,11 @@ function checkWin(player,mode) {
   }
 
   async function makeDumbMove2() {
+    let roundsave = currentround;
     await delay(0.5);
-    
+    if (roundsave != currentround) {
+      return;
+    }
     let randmmove = emptyCells(board)[parseInt(Math.random()*emptyCells(board).length)]
     let get = false
     if (randmmove == "1") {
@@ -467,7 +493,11 @@ function checkWin(player,mode) {
   }
 
   async function makeRobotMove2() {
+    let roundsave = currentround;
     await delay(0.5);
+    if (roundsave != currentround) {
+      return;
+    }
     const bestMove = minimax(board, OText).index;
     const cell = document.getElementById("board").children[bestMove];
     makeMove(cell);
